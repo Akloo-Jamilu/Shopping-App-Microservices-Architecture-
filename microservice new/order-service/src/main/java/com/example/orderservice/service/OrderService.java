@@ -35,6 +35,8 @@ public class OrderService {
                 .block();
         if (result){
             orderRepository.save(order);
+        }else {
+            throw new IllegalArgumentException("product is not in stock");
         }
 
     }
