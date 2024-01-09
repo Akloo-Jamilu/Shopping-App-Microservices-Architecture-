@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,13 +34,14 @@ public class OrderService {
                 .map(OrderLineItems::getSkuCode)
                 .toList();
         //calling inventory service and place order if product is available
-        InventoryResponse[] result = webClient.get()
+        InventoryResponse[] inventoryResponsesArray = webClient.get()
                 .uri("http://localhost:8082/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
                 .bodyToMono(InventoryResponse[].class)
                 .block();
-        if (result){
+        boolean allProductsInsStock = Arrays.stream(inventoryResponsesArray).allMatch(InventoryResponse::isInStock);
+        if (allProductsInsStock){
             orderRepository.save(order);
         }else {
             throw new IllegalArgumentException("product is not in stock");
