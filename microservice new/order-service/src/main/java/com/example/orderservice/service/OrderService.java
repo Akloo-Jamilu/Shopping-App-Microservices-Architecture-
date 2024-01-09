@@ -1,5 +1,6 @@
 package com.example.orderservice.service;
 
+import com.example.orderservice.dto.InventoryResponse;
 import com.example.orderservice.dto.OrderLineItemsDto;
 import com.example.orderservice.dto.OrderRequest;
 import com.example.orderservice.model.Order;
@@ -32,11 +33,11 @@ public class OrderService {
                 .map(OrderLineItems::getSkuCode)
                 .toList();
         //calling inventory service and place order if product is available
-        Boolean result = webClient.get()
+        InventoryResponse[] result = webClient.get()
                 .uri("http://localhost:8082/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
-                .bodyToMono(Boolean.class)
+                .bodyToMono(InventoryResponse[].class)
                 .block();
         if (result){
             orderRepository.save(order);
