@@ -23,6 +23,10 @@ public class InventoryServiceApplication {
 			inventory.setSkuCode("samsung_A12");
 			inventory.setQuantity(50);
 
+			Inventory inventory3 = new Inventory();
+			inventory.setSkuCode("samsung_A12");
+			inventory.setQuantity(50);
+
 			Inventory inventory2 = new Inventory();
 			inventory.setSkuCode("samsung_A12");
 			inventory.setQuantity(50);
