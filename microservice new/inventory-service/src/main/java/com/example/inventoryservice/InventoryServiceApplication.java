@@ -23,12 +23,17 @@ public class InventoryServiceApplication {
 			inventory.setSkuCode("samsung_A12");
 			inventory.setQuantity(50);
 
+			Inventory inventory2 = new Inventory();
+			inventory.setSkuCode("samsung_A12");
+			inventory.setQuantity(50);
+
 			Inventory inventory1 = new Inventory();
 			inventory.setSkuCode("samsung_A13");
 			inventory.setQuantity(0);
 
 			inventoryRepository.save(inventory);
 			inventoryRepository.save(inventory1);
+			inventoryRepository.save(inventory2);
 		};
 	}
 }
