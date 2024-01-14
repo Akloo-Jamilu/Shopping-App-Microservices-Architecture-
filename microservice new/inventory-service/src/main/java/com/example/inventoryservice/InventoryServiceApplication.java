@@ -34,6 +34,10 @@ public class InventoryServiceApplication {
 			inventoryRepository.save(inventory);
 			inventoryRepository.save(inventory1);
 			inventoryRepository.save(inventory2);
+
+//			inventoryRepository.save(inventory);
+//			inventoryRepository.save(inventory1);
+//			inventoryRepository.save(inventory2);
 		};
 	}
 }
